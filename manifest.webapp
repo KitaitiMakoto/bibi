@@ -1,0 +1,8 @@
+{
+  "name": "BiB/i",
+  "description": "BiB/i | EPUB Reader on Your Web Site.",
+  "icons": {
+    "128": "/bibi.png"
+  },
+  "launch_path": "/bib/i/index.html"
+}
