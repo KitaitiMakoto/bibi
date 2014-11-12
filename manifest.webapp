@@ -4,5 +4,6 @@
   "icons": {
     "128": "/bibi.png"
   },
-  "launch_path": "/bib/i/index.html"
+  "launch_path": "/bib/i/index.html",
+  "package_path": "http://localhost:3000/bibi.zip"
 }
