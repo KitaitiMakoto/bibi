@@ -5,5 +5,5 @@
     "128": "/bibi.png"
   },
   "launch_path": "/bib/i/index.html",
-  "package_path": "http://localhost:3000/bibi.zip"
+  "package_path": "/bibi.zip"
 }
