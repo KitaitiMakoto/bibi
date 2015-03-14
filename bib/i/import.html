@@ -1,0 +1,378 @@
+<style>
+/*!
+ *
+ *  # Font Awesome 4.0.3
+ *
+ *  - by @davegandy - http://fontawesome.io - @fontawesome
+ *  - License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ *
+ */
+
+@font-face {
+	font-family: "FontAwesome";
+	src: url("./res/fonts/fontawesome-webfont.eot");
+	src: url("./res/fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"),url("./res/fonts/fontawesome-webfont.woff") format("woff"),url("./res/fonts/fontawesome-webfont.ttf") format("truetype"),url("./res/fonts/fontawesome-webfont.svg#fontawesomeregular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+</style>
+
+<template>
+	<style>
+/*!
+ *
+ *  # Compass
+ *
+ *  - Copyright (c) 2009 Christopher M. Eppstein
+ *  - Released under a slightly modified MIT License. - https://github.com/Compass/compass/blob/stable/LICENSE.markdown
+ *
+ */
+
+/*!
+ *
+ *  # Pipi Style
+ *
+ *  - "Styles for Pipi, an Embedder of BiB/i"
+ *  - Copyright (c) Satoru MATSUSHIMA - http://sarasa.la/bib/i
+ *  - Licensed under the MIT license. - http://www.opensource.org/licenses/mit-license.php
+ *
+ */
+
+:host,
+:host iframe,
+:host .switch-newwindow,
+:host .switch-fullscreen {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	border: none 0;
+	vertical-align: top;
+	line-height: 1;
+	text-decoration: none;
+	background: transparent;
+}
+
+:host {
+	position: relative;
+	border: solid 1px #f8f8f8;
+}
+
+:host [hidden], :host [hidden] * {
+	display: none;
+}
+	
+:host iframe {
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+}
+
+:host .switch-newwindow,
+:host .switch-fullscreen {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	z-index: 5000;
+	top: 4px;
+	border-radius: 2px;
+	border: solid 1px rgba(128,128,128,0.25);
+	width: 27px;
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	color: white;
+	background: rgba(32,32,32,0.5);
+	opacity: 1;
+	cursor: pointer;
+	text-decoration: none;
+	-webkit-transition: 0.15s linear;
+	-moz-transition: 0.15s linear;
+	-o-transition: 0.15s linear;
+	transition: 0.15s linear;
+}
+
+:host .switch-newwindow:hover,
+:host .switch-fullscreen:hover {
+	background: rgba(128,128,128,0.5);
+}
+
+:host .switch-newwindow:before,
+:host .switch-fullscreen:before {
+	font-family: "FontAwesome";
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 18px;
+}
+
+:host .switch-newwindow {
+	right: 4px;
+	text-indent: 2px;
+	line-height: 29px;
+}
+
+:host .switch-newwindow:before {
+	content: "\f08e";
+}
+
+:host .fullscreen-enabled .switch-newwindow {
+	right: 35px;
+}
+
+:host .fullscreen-enabled .switch-fullscreen {
+	right: 4px;
+}
+
+:host .fullscreen-enabled .switch-fullscreen:before {
+	content: "\f065";
+}
+
+:host :fullscreen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :fullscreen .switch-newwindow {
+	display: none;
+}
+
+:host :fullscreen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :full-screen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :full-screen .switch-newwindow {
+	display: none;
+}
+
+:host :full-screen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :-webkit-fullscreen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :-webkit-fullscreen .switch-newwindow {
+	display: none;
+}
+
+:host :-webkit-fullscreen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :-webkit-full-screen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :-webkit-full-screen .switch-newwindow {
+	display: none;
+}
+
+:host :-webkit-full-screen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :-moz-fullscreen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :-moz-fullscreen .switch-newwindow {
+	display: none;
+}
+
+:host :-moz-fullscreen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :-moz-full-screen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :-moz-full-screen .switch-newwindow {
+	display: none;
+}
+
+:host :-moz-full-screen .switch-fullscreen:before {
+	content: "\f066";
+}
+
+:host :-ms-fullscreen {
+	position: fixed !important;
+	left: 0 !important;
+	top: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+:host :-ms-fullscreen .switch-newwindow {
+	display: none;
+}
+
+:host :-ms-fullscreen .switch-fullscreen:before {
+	content: "\f066";
+}
+	</style>
+	<span class="holder">
+		<iframe frameorder="0" scrolling="auto" allowfullscreen="true"></iframe>
+		<span class="switch-fullscreen" title="Enter Fullscreen" hidden="hidden"></span>
+		<a class="switch-newwindow" title="Open in New Window" target="_blank"></a>
+	</span>
+</template>
+<script>
+(function() {
+	/*
+	   attributes:
+	     * src
+	     * bibi-style
+	     * autostart
+	     * poster
+	   methods:
+	     * requestFullscreen
+	     * exitFullscreen
+	     * getFullscreenElement
+	   properties:
+	     * fullscreen-enabled
+	 */
+	var Element = Object.create(HTMLElement.prototype);
+	var Template = document.currentScript.ownerDocument.getElementsByTagName("template")[0];
+	var create = function(TagName, Properties) {
+		var Element = document.createElement(TagName);
+		for(var Attribute in Properties) Element[Attribute] = Properties[Attribute];
+		return Element;
+	};
+	var requestFullscreen, exitFullscreen, getFullscreenElement;
+	var FullScreenEnabled = (function(B) {
+		if(B.requestFullscreen       || B.requestFullScreen)       return true;
+		if(B.webkitRequestFullscreen || B.webkitRequestFullScreen) return true;
+		if(B.mozRequestFullscreen    || B.mozRequestFullScreen)    return true;
+		if(B.msRequestFullscreen)                                  return true;
+		return false;
+	})(document.body);
+	if(FullScreenEnabled) {
+		requestFullscreen = function(E) {
+			if(E.requestFullscreen)       return E.requestFullscreen();
+			if(E.requestFullScreen)       return E.requestFullScreen();
+			if(E.webkitRequestFullscreen) return E.webkitRequestFullscreen();
+			if(E.webkitRequestFullScreen) return E.webkitRequestFullScreen();
+			if(E.mozRequestFullscreen)    return E.mozRequestFullscreen();
+			if(E.mozRequestFullScreen)    return E.mozRequestFullScreen();
+			if(E.msRequestFullscreen)     return E.msRequestFullscreen();
+		};
+		exitFullscreen = function(D) {
+			if(D.exitFullscreen)          return D.exitFullscreen();
+			if(D.cencelFullScreen)        return D.cancelFullScreen();
+			if(D.webkitExitFullscreen)    return D.webkitExitFullscreen();
+			if(D.webkitCancelFullScreen)  return D.webkitCancelFullScreen();
+			if(D.mozExitFullscreen)       return D.mozExitFullscreen();
+			if(D.mozCancelFullScreen)     return D.mozCancelFullScreen();
+			if(D.msExitFullscreen)        return D.msExitFullscreen();
+		};
+		getFullscreenElement = function(D) {
+			if(D.fullscreenElement)       return D.fullscreenElement;
+			if(D.fullScreenElement)       return D.fullScreenElement;
+			if(D.webkitFullscreenElement) return D.webkitFullscreenElement;
+			if(D.webkitFullScreenElement) return D.webkitFullScreenElement;
+			if(D.mozFullscreenElement)    return D.mozFullscreenElement;
+			if(D.mozFullScreenElement)    return D.mozFullScreenElement;
+			if(D.msFullscreenElement)     return D.msFullscreenElement;
+			return null;
+		};
+	}
+
+	Element.createdCallback = function() {
+		var Root = this.createShadowRoot();
+		var Href = this.getAttribute("src");
+		if(!Href) return;
+		Root.appendChild(document.importNode(Template.content, true));
+		this.title = (this.innerText ? this.innerText + " " : "") + "(powered by BiB/i)";
+		var Holder = Root.getElementsByClassName("holder")[0];
+		Holder.classList.add(FullScreenEnabled ? "fullscreen-enabled" : "fullscreen-not-enabled");
+		var Src = Href;
+		var Poster = this.getAttribute("poster");
+		var Autostart = this.getAttribute("autostart");
+		if(Autostart) {
+			Src += (/#/.test(Src) ? "," : "#") + "pipi(autostart:true)";
+		} else if(Poster) {
+			var PosterLink = create("link", { href: Poster });
+			Poster = PosterLink.href;
+			delete PosterLink;
+			Src += (/#/.test(Src) ? "," : "#") + "pipi(poster:" + encodeURIComponent(Poster).replace("(", "_BibiKakkoOpen_").replace(")", "_BibiKakkoClose_") + ")";
+		}
+		var Frame = Root.getElementsByTagName("iframe")[0];
+		Frame.src = Src;
+		var SwitchNewWindow = Root.getElementsByClassName("switch-newwindow")[0];
+		SwitchNewWindow.href = Href;
+		if(FullScreenEnabled) {
+			var SwitchFullScreen = Root.getElementsByClassName("switch-fullscreen")[0];
+			SwitchFullScreen.onclick = function() {
+				if(!getFullscreenElement(document)) {
+					requestFullscreen(Holder);
+					this.title = "Exit Fullscreen";
+				} else {
+					exitFullscreen(document);
+					this.title = "Enter Fullscreen";
+				}
+			};
+			SwitchFullScreen.hidden = false;
+		}
+	};
+
+	EBook = document.registerElement("e-book", {prototype: Element});
+})();
+</script>
