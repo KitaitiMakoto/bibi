@@ -286,8 +286,6 @@
 	     * requestFullscreen
 	     * exitFullscreen
 	     * getFullscreenElement
-	   properties:
-	     * fullscreen-enabled
 	 */
 	var Element = Object.create(HTMLElement.prototype);
 	var Template = document.currentScript.ownerDocument.getElementsByTagName("template")[0];
@@ -295,6 +293,22 @@
 		var Element = document.createElement(TagName);
 		for(var Attribute in Properties) Element[Attribute] = Properties[Attribute];
 		return Element;
+	};
+	var setSrc = function(Elem, Src) {
+		var Href = Src;
+		if(Elem.autostart) {
+			Src += (/#/.test(Src) ? "," : "#") + "pipi(autostart:true)";
+		} else if(Elem.poster) {
+			var PosterLink = create("link", { href: Elem.poster });
+			Elem.poster = PosterLink.href;
+			delete PosterLink;
+			Src += (/#/.test(Src) ? "," : "#") + "pipi(poster:" + encodeURIComponent(Elem.poster).replace("(", "_BibiKakkoOpen_").replace(")", "_BibiKakkoClose_") + ")";
+		}
+		var Root = Elem.shadowRoot;
+		var Frame = Root.getElementsByTagName("iframe")[0];
+		Frame.src = Src;
+		var SwitchNewWindow = Root.getElementsByClassName("switch-newwindow")[0];
+		SwitchNewWindow.href = Href;
 	};
 	var requestFullscreen, exitFullscreen, getFullscreenElement;
 	var FullScreenEnabled = (function(B) {
@@ -335,6 +349,18 @@
 		};
 	}
 
+	["src", "poster", "autostart"].forEach(function(Property) {
+		Object.defineProperty(Element, Property, {
+			enumerable: true,
+			get: function() {
+				return this.getAttribute(Property);
+			},
+			set: function(Value) {
+				this.setAttribute(Property, Value);
+			}
+		});
+	});
+
 	Element.createdCallback = function() {
 		var Root = this.createShadowRoot();
 		var Href = this.getAttribute("src");
@@ -343,21 +369,7 @@
 		this.title = (this.innerText ? this.innerText + " " : "") + "(powered by BiB/i)";
 		var Holder = Root.getElementsByClassName("holder")[0];
 		Holder.classList.add(FullScreenEnabled ? "fullscreen-enabled" : "fullscreen-not-enabled");
-		var Src = Href;
-		var Poster = this.getAttribute("poster");
-		var Autostart = this.getAttribute("autostart");
-		if(Autostart) {
-			Src += (/#/.test(Src) ? "," : "#") + "pipi(autostart:true)";
-		} else if(Poster) {
-			var PosterLink = create("link", { href: Poster });
-			Poster = PosterLink.href;
-			delete PosterLink;
-			Src += (/#/.test(Src) ? "," : "#") + "pipi(poster:" + encodeURIComponent(Poster).replace("(", "_BibiKakkoOpen_").replace(")", "_BibiKakkoClose_") + ")";
-		}
-		var Frame = Root.getElementsByTagName("iframe")[0];
-		Frame.src = Src;
-		var SwitchNewWindow = Root.getElementsByClassName("switch-newwindow")[0];
-		SwitchNewWindow.href = Href;
+		setSrc(this, Href);
 		if(FullScreenEnabled) {
 			var SwitchFullScreen = Root.getElementsByClassName("switch-fullscreen")[0];
 			SwitchFullScreen.onclick = function() {
@@ -371,6 +383,11 @@
 			};
 			SwitchFullScreen.hidden = false;
 		}
+	};
+
+	Element.attributeChangedCallback = function(AttributeName, OldValue, NewValue) {
+		if(AttributeName !== "src") return;
+		setSrc(this, NewValue);
 	};
 
 	EBook = document.registerElement("e-book", {prototype: Element});
