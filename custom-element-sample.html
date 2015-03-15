@@ -1,0 +1,259 @@
+<!doctype html>
+<link href="bib/i/import.html" rel="import">
+<style>
+  body: {
+    line-height: 2em;
+  }
+  p {
+    text-indent: 1em;
+  }
+  pre {
+    padding: 0.5em;
+    background-color: #cccccc;
+  }
+  code {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    background-color: #cccccc;
+  }
+  e-book {
+    display: inline-block;
+    width: 12em;
+    height: 18em;
+  }
+</style>
+<h1>BiB/i Custom Element Example</h1>
+<p>BiB/iを使った、EPUB表示用のカスタム要素です。<code>e-book</code>タグを書くことで、HTML中でEPUBの本を表示することができます。</p>
+<p>Web Componentsに対応しているブラウザー（今のところChromiumとChromeとOpera）で動作します。</p>
+
+<h2>インポート</h2>
+<p>HTML中（の上の方）で次の用にしてカスタム要素をインポートします。</p>
+<pre>
+&lt;link href="//kitaitimakoto.github.io/bibi/bib/i/import.html" rel="import">
+</pre>
+
+<h2>スタイル</h2>
+<p>サンプルに進む前に、次のスタイルを当てておきます。</p>
+<pre>
+&lt;style>
+  e-book {
+    display: inline-block;
+    width: 12em;
+    height: 18em;
+  }
+&lt/style>
+</pre>
+
+<h2>単純な例</h2>
+<p>次のように<code>e-book</code>タグを書くだけで、EPUBを表示できるようになります。</p>
+<pre>
+&lt;e-book src="/bib/i/?book=kakekomiuttae">駈込み訴え&lt;/e-book>
+</pre>
+<p>参考までに、<a href="http://bibi.epub.link/manual.html">BiB/iのマニュアル</a>に書いてあるやり方はこうです。<code>src</code>でなく<code>href</code>を使っていました。</p>
+<pre>
+&lt;a href="/bib/i/?book=kakekomiuttae" data-bibi="embed">駈込み訴え&lt;/a>&lt;script src="/bib/i.js">&lt;/script>
+</pre>
+<e-book src="/bib/i/?book=kakekomiuttae">駈込み訴え</e-book>
+
+<h2>属性付きの例</h2>
+<p>BiB/iで使える、読み込み前の表示画像と自動再生（？）の指定も使えます。</p>
+<p>元は</p>
+<pre>
+&lt;a
+  <strong>data-bibi-poster</strong>="path/to/poster.png"
+  <strong>data-bibi-autostart</strong>="true"
+  href="/bib/i/?book=kakekomiuttae" data-bibi="embed">駈込み訴え&lt;/a>&lt;script src="/bib/i.js">&lt;/script>
+</pre>
+<p>となっているところ、</p>
+<pre>
+&lt;e-book
+  <strong>poster</strong>="path/to/poster.png"
+  <strong>autostart</strong>="true"
+  src="/bib/i/?book=kakekomiuttae">駈込み訴え&lt;/e-book>
+</pre>
+<p>と書いて同じことができます。<code>data-bibi-</code>の部分が不要になっています（以下の例では、実際には表紙画像を指定していません。自動再生だけです）。</p>
+<e-book
+  poster="path/to/poster.png"
+  autostart="true"
+  src="/bib/i/?book=kakekomiuttae">駈込み訴え</e-book>
+<p>元の方では<code>data-bibi-style</code>を使って本の枠にスタイル（大きさの指定など）を当てることができましたが、それには対応していません。単に、<code>e-book</code>要素の<code>style</code>属性を使えばいいからです。</p>
+<pre>
+&lt;e-book
+  <strong>style="width: 24em; height: 18em; border: red solid thin;"</strong>
+  src="/bib/i/?book=kakekomiuttae">駈込み訴え&lt;/e-book>
+</pre>
+<e-book
+  style="width: 24em; height: 18em; border: red solid thin;"
+  src="/bib/i/?book=kakekomiuttae">駈込み訴え</e-book>
+
+<h2>JavaScriptでの処理</h2>
+<p>タグを書くのではなく、普通の要素のようにJavaScriptから要素を作ることもできます。</p>
+<pre>
+&lt;script id="js1">
+  (function() {
+    var me = document.getElementById("js1");
+    var eBook = document.createElement("e-book");
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    me.parentNode.insertBefore(eBook, me);
+  })();
+&lt;/script>
+</pre>
+<script id="js1">
+  (function() {
+    var me = document.getElementById("js1");
+    var eBook = document.createElement("e-book");
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    me.parentNode.insertBefore(eBook, me);
+  })();
+</script>
+<p>コンストラクターも使えます。</p>
+<pre>
+&lt;script id="js2">
+  (function() {
+    var me = document.getElementById("js2");
+    var eBook = new HTMLEBookElement();
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    me.parentNode.insertBefore(eBook, me);
+  })();
+&lt;/script>
+</pre>
+<script id="js2">
+  (function() {
+    var me = document.getElementById("js2");
+    var eBook = new HTMLEBookElement();
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    me.parentNode.insertBefore(eBook, me);
+  })();
+</script>
+<p><code>src</code>は既に使っていますが、HTML属性に対応するプロパティを持っています。<code>autostart</code>を指定してみます。</p>
+<pre>
+&lt;script id="js3">
+  (function() {
+    var me = document.getElementById("js3");
+    var eBook = new HTMLEBookElement();
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    <strong>eBook.autostart = "true";</strong>
+    me.parentNode.insertBefore(eBook, me);
+  })();
+&lt;/script>
+</pre>
+<script id="js3">
+  (function() {
+    var me = document.getElementById("js3");
+    var eBook = new HTMLEBookElement();
+    eBook.src = "/bib/i/?book=kakekomiuttae";
+    eBook.autostart = "true";
+    me.parentNode.insertBefore(eBook, me);
+  })();
+</script>
+<p>もちろん（？）あとから本を差し替えることもできます。</p>
+<pre>
+&lt;p id="js4">
+  &lt;button>&lt;code>/bib/i/?book=kakekomiuttae&lt;/code>から&lt;code>/bib/i/?book=kakekomiuttae.epub&lt;/code>に切り替えます&lt;/button>&lt;br>
+（分かりにくくて済みません）&lt;br>
+  &lt;e-book src="/bib/i/?book=kakekomiuttae">&lt;/e-book>
+&lt;/p>
+&lt;script>
+  (function() {
+    var eBook = document.querySelector("#js4 e-book");
+    var button = document.querySelector("#js4 button");
+<strong>    button.onclick = function() {
+      eBook.src = "/bib/i/?book=kakekomiuttae.epub";
+    };</strong>
+  })();
+&lt;/script>
+</pre>
+<p id="js4">
+  <button><code>/bib/i/?book=kakekomiuttae</code>から<code>/bib/i/?book=kakekomiuttae.epub</code>に切り替えます</button><br>
+（分かりにくくて済みません）<br>
+  <e-book src="/bib/i/?book=kakekomiuttae"></e-book>
+</p>
+<script>
+  (function() {
+    var eBook = document.querySelector("#js4 e-book");
+    var button = document.querySelector("#js4 button");
+    button.onclick = function() {
+      eBook.src = "/bib/i/?book=kakekomiuttae.epub";
+    };
+  })();
+</script>
+
+<h2>読み込み時の処理</h2>
+<p>また、本（EPUBファイル）の読み込みが終了した時点での処理を書くことができます。</p>
+<pre>
+&lt;p id="js5">
+&lt;button>&lt;code>src&lt;/code>を設定して本を読み込みます&lt;/button>&lt;br>
+&lt;e-book <strong>onload="alert('読み込みました。');"</strong>&lt;/e-book>
+&lt;/p>
+&lt;script>
+  (function() {
+    var eBook = document.querySelector("#js5 e-book");
+    var button = document.querySelector("#js5 button");
+    button.onclick = function() {
+      setTimeout(function() {
+        eBook.src = "/bib/i/?book=kakekomiuttae";
+      }, 1000);
+    };
+  })();
+&lt;/script>
+</pre>
+<p id="js5">
+<button><code>src</code>を設定して本を読み込みます</button><br>
+<e-book onload="alert('読み込みました。');"></e-book>
+</p>
+<script>
+  (function() {
+    var eBook = document.querySelector("#js5 e-book");
+    var button = document.querySelector("#js5 button");
+    button.onclick = function() {
+      setTimeout(function() {
+        eBook.src = "/bib/i/?book=kakekomiuttae";
+      }, 1000);
+    };
+  })();
+</script>
+<p><code>onload</code>じゃなくて<code>addEventListner</code>でも大丈夫です。</p>
+<pre>
+&lt;p id="js6">
+&lt;button>&lt;code>src&lt;/code>を設定して本を読み込みます&lt;/button>&lt;br>
+（ブラウザーのコンソールも覗いてみてください。）&lt;br>
+&lt;e-book>&lt;/e-book>
+&lt;/p>
+&lt;script>
+  (function() {
+    var eBook = document.querySelector("#js6 e-book");
+    var button = document.querySelector("#js6 button");
+    eBook.addEventListener("load", function(event) {
+      console.log(event);
+      alert("読み込みました。");
+    });
+    button.onclick = function() {
+      setTimeout(function() {
+        eBook.autostart = "true";
+        eBook.src = "/bib/i/?book=kakekomiuttae";
+      }, 1000);
+    };
+  })();
+&lt;/script>
+</pre>
+<p id="js6">
+<button><code>src</code>を設定して本を読み込みます</button><br>
+（ブラウザーのコンソールも覗いてみてください。）<br>
+<e-book></e-book>
+</p>
+<script>
+  (function() {
+    var eBook = document.querySelector("#js6 e-book");
+    var button = document.querySelector("#js6 button");
+    eBook.addEventListener("load", function(event) {
+      console.log(event);
+      alert("読み込みました。");
+    });
+    button.onclick = function() {
+      setTimeout(function() {
+        eBook.autostart = "true";
+        eBook.src = "/bib/i/?book=kakekomiuttae";
+      }, 1000);
+    };
+  })();
+</script>
