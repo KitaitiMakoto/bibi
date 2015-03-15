@@ -296,6 +296,9 @@
 		}
 		var Root = Elem.shadowRoot;
 		var Frame = Root.getElementsByTagName("iframe")[0];
+		Frame.addEventListener("load", function(E) {
+			Elem.dispatchEvent(new E.constructor(E.type, E));
+		});
 		Frame.src = Src;
 		var SwitchNewWindow = Root.getElementsByClassName("switch-newwindow")[0];
 		SwitchNewWindow.href = Href;
@@ -339,7 +342,7 @@
 		};
 	}
 
-	["src", "poster", "autostart"].forEach(function(Property) {
+	["src", "poster", "autostart", "onload"].forEach(function(Property) {
 		Object.defineProperty(Element, Property, {
 			enumerable: true,
 			get: function() {
