@@ -378,8 +378,8 @@
 	};
 
 	Element.attributeChangedCallback = function(AttributeName, OldValue, NewValue) {
-		if(AttributeName !== "src") return;
-		setSrc(this, NewValue);
+		if(["src", "poster", "autostart"].indexOf(AttributeName) === -1) return;
+		setSrc(this, this.src);
 	};
 
 	HTMLEBookElement = document.registerElement("e-book", {prototype: Element});
