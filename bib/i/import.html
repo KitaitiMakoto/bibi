@@ -285,6 +285,7 @@
 	};
 	var setSrc = function(Elem, Src) {
 		var Href = Src;
+		if(!Src) return;
 		if(Elem.autostart) {
 			Src += (/#/.test(Src) ? "," : "#") + "pipi(autostart:true)";
 		} else if(Elem.poster) {
@@ -353,7 +354,6 @@
 	Element.createdCallback = function() {
 		var Root = this.createShadowRoot();
 		var Href = this.getAttribute("src");
-		if(!Href) return;
 		Root.appendChild(document.importNode(Template.content, true));
 		this.title = (this.innerText ? this.innerText + " " : "") + "(powered by BiB/i)";
 		var Holder = Root.getElementsByClassName("holder")[0];
