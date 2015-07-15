@@ -37,5 +37,6 @@
     "grunt-combine-media-queries": "^1.0.19"
   },
   "dependencies": {
+    "serviceworker-cache-polyfill": "^3.0.0"
   }
 }
