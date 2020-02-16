@@ -1,0 +1,16 @@
+{
+    "name": "Bibi | EPUB Reader on your website.",
+    "short_name": "Bibi",
+    "start_url": ".",
+    "display": "standalone",
+    "description": "Bibi | EPUB Reader on your website.",
+    "lang": "ja-JP",
+    "background_color": "rgb(254, 253, 252)",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "223x223",
+            "type": "image/png"
+        }
+    ]
+}

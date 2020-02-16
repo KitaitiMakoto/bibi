@@ -12,7 +12,7 @@ Bibi.preset({
 //-- Behavior
 //----------------------------------------------------------------------------------------------------------------------------------------------
 
-"reader-view-mode"             : "paged", // "paged" or "vertical" or "horizontal" ("paged" is for flipping, "vertical" and "horizontal" are for scrolling)
+"reader-view-mode"             : "vertical", // "paged" or "vertical" or "horizontal" ("paged" is for flipping, "vertical" and "horizontal" are for scrolling)
 "fix-reader-view-mode"         : "no", // "yes" or "no" or "desktop" or "mobile"
 
 "keep-settings"                : "yes", // "yes" or "no" or "desktop" or "mobile"
