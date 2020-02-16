@@ -53,7 +53,7 @@ const Config = {
             'bibi/resources/scripts/polyfills/encoding.js',
             'bibi/resources/scripts/polyfills/intersection-observer.js',
             'bibi/resources/styles/bibi.css',
-            'bibi/resources/scripts/bibi.js',
+            'bibi/resources/scripts/bibi.js'
         ].concat(Dresses['custom-made'].map(D => 'bibi/wardrobe/' + D + '/bibi.dress.css')),
         [Bibi.SRCBC]: Bibi.WithBCK ? [
             'bib/i.js'
@@ -69,7 +69,10 @@ const Config = {
     })([], {
         [Bibi.SRC]: [
             'bibi/*.html',
-            'bibi/presets/**'
+            'bibi/presets/**',
+            'bibi/*.webmanifest', // TODO: Build from bibi.info.js
+            'bibi/icon*',
+            'bibi/sw*'
         ],
         [Bibi.SRCBC]: Bibi.WithBCK ? [
             'README.BackCompatKit.md',
